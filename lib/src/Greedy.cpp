@@ -29,43 +29,31 @@ void Greedy::orderByGreaterCostBenefit() {
 
 void Greedy::merge(island list[], int left, int middle, int right) {
     
-    int i, j, k;
-    int n1 = middle - left + 1;
-    int n2 = right - middle;
-
-    island L[n1], R[n2];
-
-    for (i=0; i<n1; i++)
-        L[i] = list[left + i];
-    for (j=0; j<n2; j++)
-        R[j] = list[middle + 1 + j];
-
-    i=0;
-    j=0;
-    k=left;
-
-    while (i < n1 && j < n2){
-        cout << L[i].cost_benefit << " -> " << R[i].cost_benefit << endl;
-        if(L[i].cost_benefit >= R[i].cost_benefit){
-            list[k] = L[i];
-            i++;
+    int posLivre, inicio_vetor1, inicio_vetor2, i;
+    island aux[this->num_of_elements];
+    inicio_vetor1 = left;
+    inicio_vetor2 = middle+1;
+    posLivre = left;
+    while (inicio_vetor1 <= middle && inicio_vetor2 <= right) {
+        if (list[inicio_vetor1].cost_benefit >= list[inicio_vetor2].cost_benefit) {
+            aux[posLivre] = list[inicio_vetor1];
+            inicio_vetor1++;
         } else {
-            list[k] = R[j];
-            j++;
+            aux[posLivre] = list[inicio_vetor2];
+            inicio_vetor2++;
         }
-        k++;
+        posLivre++;
     }
-
-    while (i < n1) {
-        list[k] = L[i];
-        i++;
-        k++;
+    for(int i=inicio_vetor1; i<= middle; i++){
+        aux[posLivre] = list[i];
+        posLivre++;
     }
-
-    while (j < n2) {
-        list[k] = R[j];
-        j++;
-        k++;
+    for(int i=inicio_vetor2; i<= right; i++){
+        aux[posLivre] = list[i];
+        posLivre++;
+    }
+    for(int i=left; i<= right; i++){
+        list[i] = aux[i];
     }
 
 }
