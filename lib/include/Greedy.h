@@ -14,16 +14,20 @@ class Greedy {
     private:
         island *list;
         int num_of_elements;
+        int maxim_value;
+        int better_score;
+        int num_of_days;
 
         void mergeSort(island list[], int left, int right);
         void merge(island list[], int left, int middle, int right);
 
     
     public:
-        Greedy(int num_of_islands);
+        Greedy(int num_of_islands, int maxim_value);
         ~Greedy();
         void addIsland(int cost, int score);
         void printList();
+        void run();
         void orderByGreaterCostBenefit();
 };
 

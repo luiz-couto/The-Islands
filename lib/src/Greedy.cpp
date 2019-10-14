@@ -4,8 +4,11 @@
 
 using namespace std;
 
-Greedy::Greedy(int num_of_islands) {
+Greedy::Greedy(int num_of_islands, int maxim_value) {
+    this->maxim_value = maxim_value;
     this->list = new island[num_of_islands];
+    this->better_score = 0;
+    this->num_of_days = 0;
     this->num_of_elements = 0;
 }
 
@@ -42,6 +45,7 @@ void Greedy::merge(island list[], int left, int middle, int right) {
     k=left;
 
     while (i < n1 && j < n2){
+        cout << L[i].cost_benefit << " -> " << R[i].cost_benefit << endl;
         if(L[i].cost_benefit >= R[i].cost_benefit){
             list[k] = L[i];
             i++;
@@ -74,6 +78,22 @@ void Greedy::mergeSort(island list[], int left, int right) {
 
         this->merge(list, left, middle, right);
     }
+}
+
+void Greedy::run() {
+    int i = 0;
+    while (this->maxim_value != 0) {
+        if (this->maxim_value - this->list[i].cost >= 0) {
+            this->num_of_days++;
+            this->better_score = this->better_score + this->list[i].score;
+            this->maxim_value = this->maxim_value - this->list[i].cost;
+        } else {
+            i++;
+            if (i == this->num_of_elements)
+                break;
+        }
+    }
+    cout << this->better_score << " " << this->num_of_days << endl; 
 }
 
 void Greedy::printList() {
