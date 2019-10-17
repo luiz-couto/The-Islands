@@ -69,12 +69,13 @@ void Greedy::mergeSort(island list[], int left, int right) {
 }
 
 void Greedy::run() {
+    int max_value = this->maxim_value;
     int i = 0;
-    while (this->maxim_value != 0) {
-        if (this->maxim_value - this->list[i].cost >= 0) {
+    while (max_value != 0) {
+        if (max_value - this->list[i].cost >= 0) {
             this->num_of_days++;
             this->better_score = this->better_score + this->list[i].score;
-            this->maxim_value = this->maxim_value - this->list[i].cost;
+            max_value = max_value - this->list[i].cost;
         } else {
             i++;
             if (i == this->num_of_elements)
@@ -86,7 +87,7 @@ void Greedy::run() {
 
 int max(int a, int b) { return (a > b)? a : b; }
 
-int Greedy::run_dynamic() {
+void Greedy::run_dynamic() {
     int i, w;
     int K[this->num_of_elements+1][this->maxim_value+1];
 
@@ -100,7 +101,22 @@ int Greedy::run_dynamic() {
                 K[i][w] = K[i-1][w];
         }
     }
-    return K[this->num_of_elements][this->maxim_value];
+
+    int final_score = K[this->num_of_elements][this->maxim_value];
+
+    int number_of_islands = 0;
+    int n = this->num_of_elements;
+    int max = this->maxim_value;
+
+    while(n != 0) {
+        if (K[n][max] != K[n-1][max]) {
+            max = max - this->list[n-1].cost;
+            number_of_islands++;
+        }
+        n--;
+    }
+
+    cout << final_score << " " << number_of_islands << endl;
 }
 
 void Greedy::printList() {

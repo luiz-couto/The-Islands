@@ -14,11 +14,9 @@ int main() {
     g.addIsland(2000, 70);
 
     g.orderByGreaterCostBenefit();
-
-    g.printList();
-    cout << endl;
+    g.run();
     
-    cout << g.run_dynamic() << endl;
-    //g.run();
+    g.run_dynamic();
+    
     return 0;
 }

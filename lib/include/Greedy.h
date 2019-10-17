@@ -28,7 +28,7 @@ class Greedy {
         void addIsland(int cost, int score);
         void printList();
         void run();
-        int run_dynamic();
+        void run_dynamic();
         void orderByGreaterCostBenefit();
 };
 
