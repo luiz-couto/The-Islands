@@ -84,6 +84,25 @@ void Greedy::run() {
     cout << this->better_score << " " << this->num_of_days << endl; 
 }
 
+int max(int a, int b) { return (a > b)? a : b; }
+
+int Greedy::run_dynamic() {
+    int i, w;
+    int K[this->num_of_elements+1][this->maxim_value+1];
+
+    for(i=0; i<=this->num_of_elements; i++) {
+        for(w=0; w<=this->maxim_value;w++) {
+            if(i == 0 || w == 0)
+                K[i][w] = 0;
+            else if(this->list[i-1].cost <= w) 
+                K[i][w] = max(this->list[i-1].score + K[i-1][w - this->list[i-1].cost], K[i-1][w]);
+            else 
+                K[i][w] = K[i-1][w];
+        }
+    }
+    return K[this->num_of_elements][this->maxim_value];
+}
+
 void Greedy::printList() {
     for(int i=0; i<this->num_of_elements; i++) {
         cout << this->list[i].cost_benefit << ", ";

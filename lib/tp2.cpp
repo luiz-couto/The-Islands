@@ -17,7 +17,8 @@ int main() {
 
     g.printList();
     cout << endl;
-    g.run();
-
+    
+    cout << g.run_dynamic() << endl;
+    //g.run();
     return 0;
 }
