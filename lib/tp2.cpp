@@ -1,19 +1,36 @@
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
 
 #include "Greedy.h"
 
 using namespace std;
 
-int main() {
+int main(int argc, char **argv) {
     
-    Greedy g = Greedy(5,6000);
-    g.addIsland(1000,30);
-    g.addIsland(2000,32);
-    g.addIsland(500,4);
-    g.addIsland(5000, 90);
-    g.addIsland(2200,45);
+    if (argc < 2)
+        return 0;
+    
+    int numberIslands;
+    int maxScoreSum;
 
+    string line;
+    ifstream file(argv[1]);
+    if (file.is_open()) {
+        file >> maxScoreSum >> numberIslands; 
+    }
+    
+    Greedy g = Greedy(numberIslands,maxScoreSum);
+    
+    int islandScore;
+    int islandCost;
+    for (int i=0; i<numberIslands; i++){
+        file >> islandCost >> islandScore;
+        g.addIsland(islandCost, islandScore);
+    }
+    
     g.orderByGreaterCostBenefit();
     g.run();
 
