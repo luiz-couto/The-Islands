@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include "Greedy.h"
+#include "IslandsTrip.h"
 
 using namespace std;
 
@@ -22,19 +22,19 @@ int main(int argc, char **argv) {
         file >> maxScoreSum >> numberIslands; 
     }
     
-    Greedy g = Greedy(numberIslands,maxScoreSum);
-    
+    IslandsTrip islandsTrip = IslandsTrip(numberIslands,maxScoreSum);
+
     int islandScore;
     int islandCost;
     for (int i=0; i<numberIslands; i++){
         file >> islandCost >> islandScore;
-        g.addIsland(islandCost, islandScore);
+        islandsTrip.addIsland(islandCost, islandScore);
     }
     
-    g.orderByGreaterCostBenefit();
-    g.run();
+    islandsTrip.orderByGreaterCostBenefit();
+    islandsTrip.run_greedy();
 
-    g.run_dynamic();
+    islandsTrip.run_dynamic();
     
     return 0;
 }

@@ -1,5 +1,5 @@
-#ifndef GREEDY_
-#define GREEDY_
+#ifndef ISLANDS_TRIP_
+#define ISLANDS_TRIP_
 
 #include <iostream>
 #include <sstream>
@@ -10,7 +10,7 @@ struct island {
     double cost_benefit;
 };
 
-class Greedy {
+class IslandsTrip {
     private:
         island *list;
         int num_of_elements;
@@ -23,11 +23,11 @@ class Greedy {
 
     
     public:
-        Greedy(int num_of_islands, int maxim_value);
-        ~Greedy();
+        IslandsTrip(int num_of_islands, int maxim_value);
+        ~IslandsTrip();
         void addIsland(int cost, int score);
         void printList();
-        void run();
+        void run_greedy();
         void run_dynamic();
         void orderByGreaterCostBenefit();
 };

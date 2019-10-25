@@ -1,10 +1,10 @@
-#include "Greedy.h"
+#include "IslandsTrip.h"
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-Greedy::Greedy(int num_of_islands, int maxim_value) {
+IslandsTrip::IslandsTrip(int num_of_islands, int maxim_value) {
     this->maxim_value = maxim_value;
     this->list = new island[num_of_islands];
     this->better_score = 0;
@@ -12,22 +12,22 @@ Greedy::Greedy(int num_of_islands, int maxim_value) {
     this->num_of_elements = 0;
 }
 
-Greedy::~Greedy() {
+IslandsTrip::~IslandsTrip() {
 
 }
 
-void Greedy::addIsland(int cost, int score) {
+void IslandsTrip::addIsland(int cost, int score) {
     this->list[this->num_of_elements].cost = cost;
     this->list[this->num_of_elements].score = score;
     this->list[this->num_of_elements].cost_benefit = ((float)score/(float)cost);
     this->num_of_elements++;
 }
 
-void Greedy::orderByGreaterCostBenefit() {
+void IslandsTrip::orderByGreaterCostBenefit() {
     this->mergeSort(this->list,0,this->num_of_elements-1);
 }
 
-void Greedy::merge(island list[], int left, int middle, int right) {
+void IslandsTrip::merge(island list[], int left, int middle, int right) {
     
     int posLivre, inicio_vetor1, inicio_vetor2, i;
     island aux[this->num_of_elements];
@@ -58,7 +58,7 @@ void Greedy::merge(island list[], int left, int middle, int right) {
 
 }
 
-void Greedy::mergeSort(island list[], int left, int right) {
+void IslandsTrip::mergeSort(island list[], int left, int right) {
     if (left < right) {
         int middle = left + (right-left)/2;
         this->mergeSort(list, left, middle);
@@ -68,7 +68,7 @@ void Greedy::mergeSort(island list[], int left, int right) {
     }
 }
 
-void Greedy::run() {
+void IslandsTrip::run_greedy() {
     int max_value = this->maxim_value;
     int i = 0;
     while (max_value != 0) {
@@ -87,7 +87,7 @@ void Greedy::run() {
 
 int max(int a, int b) { return (a > b)? a : b; }
 
-void Greedy::run_dynamic() {
+void IslandsTrip::run_dynamic() {
     int i, w;
     int K[this->num_of_elements+1][this->maxim_value+1];
 
@@ -119,7 +119,7 @@ void Greedy::run_dynamic() {
     cout << final_score << " " << number_of_islands << endl;
 }
 
-void Greedy::printList() {
+void IslandsTrip::printList() {
     for(int i=0; i<this->num_of_elements; i++) {
         cout << this->list[i].cost_benefit << ", ";
     }
